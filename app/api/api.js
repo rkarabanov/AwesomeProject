@@ -1,6 +1,6 @@
 import axios from 'axios';
 import "babel-polyfill";
-let adressServer = "http://localhost:8080";
+let adressServer = "http://10.128.1.206:8080";
 export default {
 
     login(data){

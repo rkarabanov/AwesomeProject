@@ -13,10 +13,13 @@ import {
 import {ActionButton} from 'react-native-material-ui'
 import LoginValidationForm from './LoginValidationForm'
 import ForgotPassBtn from'./ForgotPassBtn'
+import UserStore from '../store/store'
 
 import { COLOR, ThemeProvider } from 'react-native-material-ui';
 
 // you can set your style right here, it'll be propagated to application
+
+
 
 export default class LoginScreen extends Component{
     static navigationOptions = {
@@ -27,7 +30,7 @@ export default class LoginScreen extends Component{
     }
 
     onPressBtn(){
-        this.props.navigation.navigate('ForgotPass');
+        this.props.navigation.navigate('Reg');
     }
 
     render(){
@@ -35,18 +38,24 @@ export default class LoginScreen extends Component{
         return(<View style={styles.container}>
                     <Text style={styles.hello}>Login</Text>
                     <View  style={styles.button} >
-                        <LoginValidationForm/>
-                    <View  style={styles.button} >
+                        <LoginValidationForm navigate={navigate}/>
+                    <View  style={styles.marginTop} >
                     {/*<Button  title="It's good" onPress={this.onClick.bind(this)}/>*/}
-                        <Button onPress={this.onPressBtn.bind(this)} title="Forgot">
+                        <Button  onPress={this.onPressBtn.bind(this)} title="Registration">
                         </Button>
                     </View>
                     </View>
                 </View>)
     }
+
+
+
 }
 
 const styles = StyleSheet.create({
+    marginTop:{
+        marginTop:10
+    },
     container: {
         flex: 1,
         justifyContent: 'center',

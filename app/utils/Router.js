@@ -5,50 +5,44 @@ import { connect } from 'react-redux';
 import LoginScreen from '../components/Login';
 import Dashboard from '../components/Dashboard';
 import ForgotPass from '../components/ForgotPass';
+import Example from '../components/Example';
+import Reg from '../components/Reg';
 
 export const ContentStack = StackNavigator({
     Login: {
         screen: LoginScreen,
-    },
-    Dashboard:{
-        screen: Dashboard,
+        navigationOptions: {
+            headerLeft: null
+        },
     },
     ForgotPass:{
         screen: ForgotPass,
+    },
+    Dashboard:{
+        screen: Dashboard,
+        navigationOptions: {
+            title: "Dashboard",
+            headerLeft: null
+        },
+    },
+    Reg:{
+        screen: Reg,
+        navigationOptions: {
+            headerLeft: null
+        },
+    },
+    Example:{
+        screen: Example,
+        navigationOptions: {
+            title: "Example",
+            headerLeft: null
+        },
     }
 });
 
-// export const Login = StackNavigator({
-//     Login: {
-//         screen: LoginForm,
-//     },
-//     SignUp: {
-//         screen: SignUp,
-//     },
-//     SocialLogin: {
-//         screen: SocialLogin,
-//     },
-// }, {
-//     headerMode: 'none',
-// });
 
 export const Route = DrawerNavigator({
     Content: {
         screen: ContentStack,
     },
 });
-
-// export const AppWithNavigationState = ({ dispatch, nav }) => (
-//     <Route navigation={addNavigationHelpers({ dispatch, state: nav })} />
-// );
-//
-// AppWithNavigationState.propTypes = {
-//     dispatch: PropTypes.func.isRequired,
-//     nav: PropTypes.object,
-// };
-//
-// const mapStateToProps = state => ({
-//     nav: state.nav,
-// });
-//
-// export default connect(mapStateToProps)(AppWithNavigationState);

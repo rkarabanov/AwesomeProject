@@ -9,29 +9,11 @@ import {StackRouter, StackNavigator} from 'react-navigation';
 import LoginScreen from './app/components/Login';
 import {MenuContext} from 'react-native-popup-menu';
 import {ThemeProvider} from 'react-native-material-ui';
-import { ContentStack} from './app/utils/Router'
-import configureStore from './app/store/configureStore'
+import { ContentStack,Route} from './app/utils/Router'
 import {Provider} from 'react-redux'
 import {Router, browserHistory} from 'react-router'
 
-// class HomeScreen extends Component {
-//     static navigationOptions = {
-//         title: 'Welcome',
-//     };
-//
-//     render() {
-//         const {navigate} = this.props.navigation;
-//         return <View><Text>Hello, Navigation!</Text><Button
-//             onPress={() => navigate('Login')}
-//             title="Chat with Lucy"
-//         /></View>;
-//     }
-// }
-//
-// const SimpleApp = StackNavigator({
-//     // Home: { screen: HomeScreen },
-//     Login: {screen: LoginScreen},
-// });
+
 
 
 class App extends Component {
@@ -60,16 +42,11 @@ class App extends Component {
                 },
             },
         };
-        {/*<ThemeProvider uiTheme={uiTheme}>*/
-        }
 
-        {/*<Provider store={store}>*/}
-        // const store = configureStore();
-        {/*<MenuContext>*/}
         return (
             <MenuContext>
                         <ThemeProvider uiTheme={uiTheme}>
-                            <ContentStack/>
+                            <Route/>
                         </ThemeProvider>
             </MenuContext>
         );

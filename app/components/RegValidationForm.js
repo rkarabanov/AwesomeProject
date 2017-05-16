@@ -1,3 +1,4 @@
+
 import React, {Component, PropTypes} from 'react';
 import {
     AppRegistry,
@@ -11,20 +12,20 @@ import {Form, TextValidator} from 'react-native-validator-form';
 import dismissKeyboard from 'dismissKeyboard';
 
 
-import LoginAction from '../actions/LoginAction'
+import RegAction from '../actions/RegAction'
 
 
-
-export default class LoginValidationForm extends Component {
+export default class RegValidationForm extends Component {
 
 
     constructor(props) {
         super(props);
         this.state = {
-            user: {email: '', pass: ''}
+            user: {email: '', pass: '',repeat:''}
         };
         this.handleChange = this.handleChange.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
+        this.handleRepeatPassword = this.handleRepeatPassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.submit = this.submit.bind(this);
     }
@@ -32,6 +33,7 @@ export default class LoginValidationForm extends Component {
     handleChange(event) {
         const {user} = this.state;
         user.email = event.nativeEvent.text;
+        // console.log(user.email);
         this.setState({user});
     }
 
@@ -40,9 +42,9 @@ export default class LoginValidationForm extends Component {
         console.log("SUBMIT");
         const {user} = this.state;
 
-        LoginAction.login(user).then(() => {
-            this.setState({ user: {email: '', pass: ''}});
-                this.props.navigate('Dashboard')
+        RegAction.reg(user).then(() => {
+                this.setState({ user: {email: '', pass: '',repeat:''}});
+                this.props.navigate('Login')
             }
         ).catch((err) => {
             console.log("error");
@@ -65,9 +67,21 @@ export default class LoginValidationForm extends Component {
         this.setState({user});
     }
 
+    handleRepeatPassword(event) {
+        const { user } = this.state;
+        user.repeat = event.nativeEvent.text;
+        this.setState({ user });
+    }
+
     componentWillMount() {
+        console.log("REG VALIDATION");
         dismissKeyboard();
-        console.log("LOGIN VALIDATION");
+        Form.addValidationRule('isPasswordMatch', (value) => {
+            if (value !== this.state.user.pass) {
+                return false;
+            }
+            return true;
+        });
     }
 
     render() {
@@ -75,12 +89,12 @@ export default class LoginValidationForm extends Component {
         return (
             <Form
                 ref="form"
-                 onSubmit={this.submit}
+                onSubmit={this.submit}
             >
                 <TextValidator
                     name="email"
-                label="email"
-                validators={['required', 'isEmail']}
+                    label="email"
+                    validators={['required', 'isEmail']}
                     errorMessages={['This field is required', 'Email invalid']}
                     placeholder="Your email"
                     type="text"
@@ -99,6 +113,17 @@ export default class LoginValidationForm extends Component {
                     value={user.pass}
                     onChange={this.handlePassword}
                 />
+                <TextValidator
+                    name="repeatPassword"
+                    label="text"
+                    secureTextEntry={true}
+                    placeholder="Repeat Password"
+                    validators={['isPasswordMatch','required']}
+                    errorMessages={['Password mismatch','This field is required']}
+                    type="text"
+                    value={user.repeat}
+                    onChange={this.handleRepeatPassword}
+                />
                 <Button
                     title="Submit"
                     onPress={this.handleSubmit}
@@ -108,15 +133,8 @@ export default class LoginValidationForm extends Component {
 
         );
     }
-
-
-    componentWillUnmount()
-    {
-        this.setState({ user: {email: '', pass: ''}});
-    }
-
 }
 
-LoginValidationForm.propTypes = {
+RegValidationForm.propTypes = {
     navigate: PropTypes.func.isRequired
 };

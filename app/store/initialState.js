@@ -1,4 +1,4 @@
-import enums from "../constans/Const"
+import enums from "../constants/Const"
 
 const initialState ={
 	errorToAccess: true,
@@ -7,7 +7,6 @@ const initialState ={
 	loadingStatus: enums.LOAD_REQUEST,
 	tasks:[],
 	allUsers:[]
-	// file:{}
 };
 
 export default initialState;
