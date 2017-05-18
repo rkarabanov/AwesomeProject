@@ -37,8 +37,12 @@ const TasksStore=Object.assign({}, EventEmitter.prototype,{
 
 AppDispatcher.register(function(action) {
     switch(action.type) {
+        case AppConstants.CHANGE_TASK_STATUS:
+        case AppConstants.CHANGE_TASK:
+        case AppConstants.ADD_TASK:
+        case AppConstants.REMOVE_TASK:
         case AppConstants.GET_TASKS:{
-            // console.log(action.data);
+            console.log(action.data.data);
             _tasks=action.data.data;
             TasksStore.emitChange();
             break;

@@ -11,4 +11,8 @@ export default keyMirror ({
     LOADING_WAITING:null,
     LOADING_SUCCESS:null,
     LOADING_FAIL:null,
+    CHANGE_TASK_STATUS:null,
+    REMOVE_TASK:null,
+    ADD_TASK:null,
+    CHANGE_TASK:null,
 });
