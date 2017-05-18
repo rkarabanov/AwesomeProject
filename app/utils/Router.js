@@ -9,6 +9,18 @@ import Example from '../components/Example';
 import Reg from '../components/Reg';
 
 export const ContentStack = StackNavigator({
+
+    Dashboard:{
+        screen: Dashboard,
+        navigationOptions: {
+            title: "Dashboard",
+            headerLeft: null
+        },
+    },
+
+});
+
+export const Login = StackNavigator({
     Login: {
         screen: LoginScreen,
         navigationOptions: {
@@ -17,13 +29,6 @@ export const ContentStack = StackNavigator({
     },
     ForgotPass:{
         screen: ForgotPass,
-    },
-    Dashboard:{
-        screen: Dashboard,
-        navigationOptions: {
-            title: "Dashboard",
-            headerLeft: null
-        },
     },
     Reg:{
         screen: Reg,
@@ -37,9 +42,12 @@ export const ContentStack = StackNavigator({
             title: "Example",
             headerLeft: null
         },
-    }
+    },
+    SignUp: {
+        screen: ContentStack,
+    }}, {
+    headerMode: 'none',
 });
-
 
 export const Route = DrawerNavigator({
     Content: {

@@ -23,7 +23,7 @@ export default {
     },
 
     inSystem(jwtUser){
-        // onCheck.log(jwtUser);
+         console.log("jwtUser",jwtUser);
         return axios.post(adressServer + "/checkJwt", jwtUser);
     },
 

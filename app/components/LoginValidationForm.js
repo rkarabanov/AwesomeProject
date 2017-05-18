@@ -42,7 +42,7 @@ export default class LoginValidationForm extends Component {
 
         LoginAction.login(user).then(() => {
             this.setState({ user: {email: '', pass: ''}});
-                this.props.navigate('Dashboard')
+                this.props.navigate('SignUp')
             }
         ).catch((err) => {
             console.log("error");

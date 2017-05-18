@@ -13,7 +13,7 @@ import {
 import {ActionButton} from 'react-native-material-ui'
 import LoginValidationForm from './LoginValidationForm'
 import ForgotPassBtn from'./ForgotPassBtn'
-import UserStore from '../store/store'
+import UserStore from '../store/userStore'
 
 import { COLOR, ThemeProvider } from 'react-native-material-ui';
 

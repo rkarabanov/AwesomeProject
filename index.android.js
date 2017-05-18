@@ -3,22 +3,55 @@ import {
     AppRegistry,
     Text,
     View,
-    Button
+    Button,
+    AppState
 } from 'react-native';
-import {StackRouter, StackNavigator} from 'react-navigation';
-import LoginScreen from './app/components/Login';
 import {MenuContext} from 'react-native-popup-menu';
 import {ThemeProvider} from 'react-native-material-ui';
-import { ContentStack,Route} from './app/utils/Router'
+import { ContentStack,Route,Login} from './app/utils/Router'
 import {Provider} from 'react-redux'
+import UserStore from './app/store/userStore'
 import {Router, browserHistory} from 'react-router'
-
+import Const from './app/constants/Const'
+import LoginAction from './app/actions/LoginAction'
 
 
 
 class App extends Component {
 
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentAppState: AppState.currentState,
+            logged:UserStore.isLoggedIn(),
+            loading:Const.LOADING_WAITING
+        };
+    }
+
+    componentDidMount() {
+        let res =UserStore.hasItem();
+        res.then((res)=>{
+            console.log('res',res);
+            res?
+                UserStore.loadItem().then((jwt)=>{
+                    console.log('jwt',jwt);
+                LoginAction.isInSystem(jwt).then(()=>{
+            console.log("UserStore.isLoggedIn()");
+            this.setState({logged:UserStore.isLoggedIn()});
+            if(this.state.logged){
+                this.setState({loading:Const.LOADING_SUCCESS});
+                UserStore.emitChange();
+            }else{
+                this.setState({loading:Const.LOADING_FAIL});
+                UserStore.emitChange();
+            }
+            console.log('loading',this.state.loading)})}): this.setState({loading:Const.LOADING_FAIL});
+        })
+    }
+
+
+
+        render() {
         const uiTheme = {
             toolbar: {
                 container: {
@@ -42,11 +75,13 @@ class App extends Component {
                 },
             },
         };
-
+console.log("preresnder", this.state.loading);
+            console.log("preresnder", UserStore.getUser());
+// console.log(UserStore.isLoggedIn());
         return (
             <MenuContext>
                         <ThemeProvider uiTheme={uiTheme}>
-                            <Route/>
+                            {Const.LOADING_WAITING===this.state.loading?<View/>:(this.state.logged) ? <Route /> : <Login /> }
                         </ThemeProvider>
             </MenuContext>
         );

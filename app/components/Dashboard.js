@@ -1,47 +1,66 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import {
     AppRegistry,
     StyleSheet,
     Text,
     View,
-    Navigator,Button,
+    Navigator, Button,
     NativeModules,
     Image
 } from 'react-native';
-import { Avatar } from 'react-native-material-ui';
-import UserStore  from '../store/store'
+import {Avatar} from 'react-native-material-ui';
+import UserStore  from '../store/userStore'
+import  ToDoList  from './ToDoList'
+import Const from '../constants/Const'
 
 export default class Dashboard extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            user:{}
+        this.state = {
+            user: {}
         };
     }
 
     componentWillMount() {
-        if(UserStore.getUser()!==undefined||this.state.user!==null)
-        this.setState({
-            user:UserStore.getUser()
-        });
-        console.log('User:');
-        console.log(this.state.user);
+        // let interval = setInterval(function () {
+            if (UserStore.getUser() !== undefined || this.state.user !== null) {
+                this.setState({
+                    user: UserStore.getUser()
+                });
+                //     console.log("Dashboard:");
+                //     console.log(this.state.user);
+                //     clearInterval(interval);}
+                // }.bind(this), 500);
+
+
+            }
     }
 
-    getEmail(){
-        // console.log(this.state.user.data_uri);
-        return this.state.user===undefined||this.state.user===null?'':this.state.user.email;
+    getUser() {
+        // console.log(UserStore.getUser());
     }
 
-    render(){
-        return(
+    getEmail() {
+        return this.state.user === undefined || this.state.user === null ? '' : this.state.user.email;
+    }
+
+    getTodoList() {
+        return this.getEmail() === '' ? <View/> : <ToDoList user={this.state.user}/>
+    }
+
+    render() {
+        // console.log(UserStore.getUser());
+        const {navigate} = this.props.navigation;
+        return (
             <View style={styles.container}>
-                    {/*<View  style={styles.textAlignCenter} >*/}
-                {/*<Avatar image={<Image source={this.state.user.data_uri} />}/>*/}
-                    {/*</View>*/}
                 <Text style={styles.hello}>Dashboard, {this.getEmail()}</Text>
-
+                {/*<Button title="das" onPress={() => {*/}
+                    {/*this.getUser()*/}
+                {/*}}/>*/}
+                <ToDoList user={this.state.user}/>
+                {/*{this.getTodoList()}*/}
+                {/*<Button  title="user" onPress={()=>console.log(this.state.user)} />*/}
             </View>
         )
     }
@@ -58,19 +77,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 10,
     },
-    button:{
+    button: {
 
         // backgroundColor: 'skyblue',
 
-        width:'50%',
+        width: '50%',
         justifyContent: 'center',
-        marginLeft:'25%',
+        marginLeft: '25%',
 
     },
-    center:{
+    center: {
         justifyContent: 'center',
     },
-    textAlignCenter:{
+    textAlignCenter: {
         textAlign: 'center'
     }
 });
