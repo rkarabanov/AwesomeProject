@@ -13,7 +13,7 @@ export const ContentStack = StackNavigator({
     Dashboard:{
         screen: Dashboard,
         navigationOptions: {
-            title: "Dashboard",
+            headerStyle: {display:"none"},
             headerLeft: null
         },
     },
@@ -50,6 +50,7 @@ export const Login = StackNavigator({
 });
 
 export const Route = DrawerNavigator({
+
     Content: {
         screen: ContentStack,
     },

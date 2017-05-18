@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Toolbar } from 'react-native-material-ui';
 import {
     AppRegistry,
     StyleSheet,
@@ -54,7 +55,10 @@ export default class Dashboard extends Component {
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-                <Text style={styles.hello}>Dashboard, {this.getEmail()}</Text>
+                <Toolbar
+                    centerElement={"Dashboard, "+this.getEmail()}
+                    />
+                {/*<Text style={styles.hello}>Dashboard, {this.getEmail()}</Text>*/}
                 {/*<Button title="das" onPress={() => {*/}
                     {/*this.getUser()*/}
                 {/*}}/>*/}

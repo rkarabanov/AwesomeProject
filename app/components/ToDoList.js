@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {ListItem, Toolbar, Checkbox,ActionButton } from 'react-native-material-ui';
+import {ListItem,  Checkbox,ActionButton,Toolbar } from 'react-native-material-ui';
 import {
     AppRegistry,
     StyleSheet,
@@ -224,6 +224,7 @@ export default class ToDoList extends Component {
                 />
             });
         return <View  style={styles.container}>
+
             <ScrollView style={{height:"80%"}}>
                 {list}
             </ScrollView>
