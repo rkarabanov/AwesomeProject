@@ -17,6 +17,13 @@ export const ContentStack = StackNavigator({
             headerLeft: null
         },
     },
+    Login:{
+       screen: LoginScreen,
+        navigationOptions: {
+            headerStyle: {display:"none"},
+            headerLeft: null
+        },
+    }
 
 });
 

@@ -35,8 +35,13 @@ class App extends Component {
             res?
                 UserStore.loadItem().then((jwt)=>{
                     console.log('jwt',jwt);
+                    // this.setState({loading:Const.LOADING_FAIL})
                 LoginAction.isInSystem(jwt).then(()=>{
             console.log("UserStore.isLoggedIn()");
+            if(UserStore.getUser()===undefined||UserStore.getUser()===null){
+                this.setState({loading:Const.LOADING_FAIL})
+            }
+            else {
             this.setState({logged:UserStore.isLoggedIn()});
             if(this.state.logged){
                 this.setState({loading:Const.LOADING_SUCCESS});
@@ -45,7 +50,7 @@ class App extends Component {
                 this.setState({loading:Const.LOADING_FAIL});
                 UserStore.emitChange();
             }
-            console.log('loading',this.state.loading)})}): this.setState({loading:Const.LOADING_FAIL});
+            console.log('loading',this.state.loading)}})}): this.setState({loading:Const.LOADING_FAIL});
         })
     }
 

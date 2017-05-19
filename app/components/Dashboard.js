@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import {Toolbar } from 'react-native-material-ui';
+import {Toolbar,Button } from 'react-native-material-ui';
 import {
     AppRegistry,
     StyleSheet,
     Text,
     View,
-    Navigator, Button,
+    Navigator,
     NativeModules,
     Image
 } from 'react-native';
@@ -13,6 +13,7 @@ import {Avatar} from 'react-native-material-ui';
 import UserStore  from '../store/userStore'
 import  ToDoList  from './ToDoList'
 import Const from '../constants/Const'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Dashboard extends Component {
 
@@ -57,6 +58,14 @@ export default class Dashboard extends Component {
             <View style={styles.container}>
                 <Toolbar
                     centerElement={"Dashboard, "+this.getEmail()}
+                    rightElement={
+                         <Button
+                            text=""
+                            icon="exit-to-app"
+                           style={{ text: { color: 'white' } }}
+                            // onPress={()=>{console.log("Login");navigate("Login");}}
+                         />
+                     }
                     />
                 {/*<Text style={styles.hello}>Dashboard, {this.getEmail()}</Text>*/}
                 {/*<Button title="das" onPress={() => {*/}
